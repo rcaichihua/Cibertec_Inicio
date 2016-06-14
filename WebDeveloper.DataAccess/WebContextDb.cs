@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebDeveloper.Model;
+
+namespace WebDeveloper.DataAccess
+{
+    //con dbContext -> contexto de datos.
+    public class WebContextDb : DbContext
+    {
+        //ctor snip tab tab
+        public WebContextDb() : base("name=WebDeveloperConnectionString")
+        {
+
+        }
+        //indicar la tabla a la que se va a relacionar
+        //DbSet mapear al objeto Clients(asi se llamara la tabla en la base de datos)
+        public DbSet<Client> CLients { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //evitar poner en plural a los objetos sin agregar(es)
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            //base.OnModelCreating(modelBuilder);
+        }
+    }
+}
