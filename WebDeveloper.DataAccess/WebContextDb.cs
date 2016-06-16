@@ -15,7 +15,7 @@ namespace WebDeveloper.DataAccess
         //ctor snip tab tab
         public WebContextDb() : base("name=WebDeveloperConnectionString")
         {
-
+            Database.SetInitializer(new WebDeveloperInitializer());
         }
         //indicar la tabla a la que se va a relacionar
         //DbSet mapear al objeto Clients(asi se llamara la tabla en la base de datos)
