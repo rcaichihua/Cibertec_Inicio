@@ -15,11 +15,12 @@ namespace WebDeveloper.DataAccess
         //ctor snip tab tab
         public WebContextDb() : base("name=WebDeveloperConnectionString")
         {
-            Database.SetInitializer(new WebDeveloperInitializer());
+            //Database.SetInitializer(new WebDeveloperInitializer());
         }
         //indicar la tabla a la que se va a relacionar
         //DbSet mapear al objeto Clients(asi se llamara la tabla en la base de datos)
-        public DbSet<Client> CLients { get; set; }
+        public DbSet<Client> clients { get; set; }
+        public DbSet<Product> products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using WebDeveloper.DataAccess;
 using WebDeveloper.Model;
@@ -14,6 +9,7 @@ namespace WebDeveloper.Controllers
     {
         //se instancia una sola vez porq en produccion en el IIS se carga una sola vez.
         private ClientData _client = new ClientData();
+
         // GET: Client
         public ActionResult Index()
         {

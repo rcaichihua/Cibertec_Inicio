@@ -44,13 +44,13 @@ namespace WebDeveloper.DataAccess
         {
             using (var dbContext = new WebContextDb())
             {
-                return dbContext.CLients.FirstOrDefault(x => x.ID == id);
+                return dbContext.clients.FirstOrDefault(x => x.ID == id);
             }
         }
 
-        public object Entry(Client client)
-        {
-            throw new NotImplementedException();
-        }
+        //public object Entry(Client client)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
