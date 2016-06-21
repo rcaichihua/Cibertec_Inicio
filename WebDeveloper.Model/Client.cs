@@ -14,5 +14,8 @@ namespace WebDeveloper.Model
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "The Last Name is required")]
         public string LastName { get; set; }
+        //al cambiar el apellido se da ctrl . para q aparezca la observacion de cambiar
+        //esa variable en todo el proyecto.
+
     }
 }
