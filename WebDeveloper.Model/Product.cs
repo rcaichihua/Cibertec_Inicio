@@ -21,5 +21,7 @@ namespace WebDeveloper.Model
         [DataType(DataType.Date, ErrorMessage = "Date only")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? SellEndDate { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
     }
 }

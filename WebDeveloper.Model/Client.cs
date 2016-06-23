@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebDeveloper.Model
 
@@ -16,6 +17,8 @@ namespace WebDeveloper.Model
         public string LastName { get; set; }
         //al cambiar el apellido se da ctrl . para q aparezca la observacion de cambiar
         //esa variable en todo el proyecto.
+        //[DataType(DataType.DateTime, ErrorMessage = "Date only")]
+        public DateTime? DateCreation { get; set; }
 
     }
 }
