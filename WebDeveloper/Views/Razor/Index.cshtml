@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WebDeveloper.Model.Client>
+@{
+    ViewBag.Title = "Practica";
+
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<h2>@ViewBag.Demo</h2>
+
+@foreach (var item in Model)
+{   <div class="col-lg-4">
+        <label>Id:</label> @item.ID<br />
+        <label>Name:</label> @item.Name<br />
+        <label>Last Name:</label> @item.LastName<br />
+        <!--Si estas dentro de un bloque igual debes usar el Arroba-->
+        @if (item.DateCreation == null)
+        {
+            item.DateCreation = DateTime.Now;
+        }
+        <label>Date:</label>@item.DateCreation <br />
+    </div>
+    <!--Si hay interpolacion entre html5 y razor se tienen q insetar Arroba-->
+    }
+
+    <!--(Arroba)Model con mayuscula recupero los parametros del modelo-->
+    <!--El controlador manda - un objeto no puede ser creaod ni instanciado en la vista-->

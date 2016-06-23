@@ -36,7 +36,7 @@ namespace WebDeveloper.Helpers
         }
         private static string DisplayPrintDate(DateTime? SellEndDate)
         {
-            return (SellEndDate.HasValue ? "<span>Free!!!!</span" : $"<span>{SellEndDate.Value.ToString("dd-mm-yyyy")}</span");
+            return (SellEndDate.HasValue ? "<span>Free!!!!</span" : $"<span>{SellEndDate}</span");
         }
         #endregion
     }
