@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\LogActionFilter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -232,6 +233,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Razor\Product.cshtml" />
     <Content Include="Views\Razor\Index.cshtml" />
+    <Content Include="Views\Razor\EntryDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
