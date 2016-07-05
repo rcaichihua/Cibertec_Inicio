@@ -235,7 +235,6 @@
     <Content Include="scss\styles.scss" />
     <Content Include="scss\base\_site.scss" />
     <Content Include="scss\helpers\_colors.scss" />
-    <Content Include="Views\Client\index.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\Delete.cshtml" />
@@ -246,6 +245,7 @@
     <Content Include="Views\Razor\Product.cshtml" />
     <Content Include="Views\Razor\Index.cshtml" />
     <Content Include="Views\Razor\EntryDate.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -267,6 +267,10 @@
     <ProjectReference Include="..\WebDeveloper.Model\WebDeveloper.Model.csproj">
       <Project>{18404a43-9072-48c5-9370-1e7628e3d95e}</Project>
       <Name>WebDeveloper.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebDeveloper.Resources\WebDeveloper.Resources.csproj">
+      <Project>{bba7d6b4-e73b-40e4-b427-669704b7deb6}</Project>
+      <Name>WebDeveloper.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

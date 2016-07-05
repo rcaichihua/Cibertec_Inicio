@@ -25,6 +25,7 @@ namespace WebDeveloper.Controllers
         // GET: Client
         public ActionResult Index()
         {
+            ViewBag.Title = Resources.Resource.Client_Title;
             //control punto
             //return View(client.GetFakeData());
             return View(_client.GetList());
