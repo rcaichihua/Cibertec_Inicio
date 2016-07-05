@@ -7,9 +7,21 @@ namespace WebDeveloper.Controllers
 {
     public class ClientController : Controller
     {
+        //Con esto ya no se necsita llamar al contrsutros de la clase 
+        //Ejemplo Single Inyector
+        //Lo 
         //se instancia una sola vez porq en produccion en el IIS se carga una sola vez.
-        private ClientData _client = new ClientData();
+        //-> se comenta en contenbedores.
+        //private ClientData _client = new ClientData();
+        //
+        //Se cambio el IdataAccess<client> y salio error abajo en el metodo GetClient REVISAR.
+        //private IDataAccess<Client> _client;
+        private ClientData _client;
 
+        public ClientController(ClientData client)
+        {
+            _client = client;
+        }
         // GET: Client
         public ActionResult Index()
         {

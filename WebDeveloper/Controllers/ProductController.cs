@@ -8,8 +8,16 @@ namespace WebDeveloper.Controllers
 {
     public class ProductController : Controller
     {
-        private ProductData _product = new ProductData();
+        //sE COMENTA PRA USAR INYECTOR DE DEPENDENCIA
+        //private ProductData _product = new ProductData();
         // GET: Product
+        private ProductData _product;
+
+        public ProductController(ProductData product)
+        {
+            _product = product;
+        }
+
         public ActionResult Index()
         {
             return View(_product.GetList());
@@ -17,6 +25,12 @@ namespace WebDeveloper.Controllers
         public ActionResult Create()
         {
             return View(new Product());
+        }
+        //agregue para ver que se usa directo el GetFakeProducts
+        public ActionResult Product()
+        {
+            var productData = new ProductData();
+            return View(productData.GetFakeProducts());
         }
 
         [HttpPost]

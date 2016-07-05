@@ -3,7 +3,7 @@ namespace WebDeveloper.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class script01 : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,8 @@ namespace WebDeveloper.DataAccess.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
-                        Apellidos = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        DateCreation = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -27,6 +28,8 @@ namespace WebDeveloper.DataAccess.Migrations
                         Color = c.String(nullable: false),
                         ListPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         SellEndDate = c.DateTime(),
+                        Price = c.Double(nullable: false),
+                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             

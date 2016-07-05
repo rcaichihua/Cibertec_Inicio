@@ -10,7 +10,6 @@ namespace WebDeveloper.DataAccess.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebDeveloper.DataAccess.WebContextDb";
         }
 
         protected override void Seed(WebDeveloper.DataAccess.WebContextDb context)
