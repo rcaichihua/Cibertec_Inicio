@@ -6,6 +6,7 @@ using WebDeveloper.Model;
 
 namespace WebDeveloper.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         //sE COMENTA PRA USAR INYECTOR DE DEPENDENCIA

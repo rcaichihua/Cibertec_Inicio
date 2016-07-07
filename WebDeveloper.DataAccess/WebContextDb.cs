@@ -28,5 +28,9 @@ namespace WebDeveloper.DataAccess
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //base.OnModelCreating(modelBuilder);
         }
+
+        //public System.Data.Entity.DbSet<WebDeveloper.Models.Account.LoginViewModel> LoginViewModels { get; set; }
+
+        //public System.Data.Entity.DbSet<WebDeveloper.Models.Account.LoginViewModel> LoginViewModels { get; set; }
     }
 }
