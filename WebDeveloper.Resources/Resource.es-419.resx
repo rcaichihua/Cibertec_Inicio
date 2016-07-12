@@ -117,43 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Client_DateCreation" xml:space="preserve">
-    <value>Fecha Creacion</value>
-  </data>
-  <data name="Client_Id" xml:space="preserve">
-    <value>Codigo</value>
-  </data>
-  <data name="Client_LastName" xml:space="preserve">
-    <value>Apellidos</value>
-  </data>
-  <data name="Client_Name" xml:space="preserve">
-    <value>Nombres</value>
-  </data>
-  <data name="Client_Title" xml:space="preserve">
-    <value>Lista de Clientes</value>
-  </data>
-  <data name="Product_Color" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="Product_Description" xml:space="preserve">
-    <value>Descripcion</value>
-  </data>
-  <data name="Product_Id" xml:space="preserve">
-    <value>Codigo</value>
-  </data>
-  <data name="Product_ListPrice" xml:space="preserve">
-    <value>Lista de precio</value>
-  </data>
-  <data name="Product_Name" xml:space="preserve">
+  <data name="FirstName" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="Product_Price" xml:space="preserve">
-    <value>Precio</value>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellidos</value>
   </data>
-  <data name="Product_ProductNumber" xml:space="preserve">
-    <value>Numero de producto</value>
-  </data>
-  <data name="Product_SellEndDate" xml:space="preserve">
-    <value>Fecha de fin</value>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Segundo Nombre</value>
   </data>
 </root>

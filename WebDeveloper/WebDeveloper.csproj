@@ -18,10 +18,11 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -44,18 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LightInject, Version=3.0.1.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightInject.3.0.1.7\lib\net45\LightInject.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="LightInject.Mvc, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightInject.Mvc.1.0.0.4\lib\net45\LightInject.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="LightInject.Web, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightInject.Web.1.0.0.4\lib\net45\LightInject.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -174,24 +163,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionFilters\LogActionFilter.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\BaseAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\RazorController.cs" />
-    <Compile Include="Controllers\WebDeverUser.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomHelper.cs" />
-    <Compile Include="Models\Account\LoginViewModel.cs" />
-    <Compile Include="Models\Account\RegisterViewModel.cs" />
-    <Compile Include="Models\Account\WebUserDbContext.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -241,23 +228,29 @@
     <Content Include="scss\styles.scss" />
     <Content Include="scss\base\_site.scss" />
     <Content Include="scss\helpers\_colors.scss" />
-    <Content Include="Views\Client\Create.cshtml" />
-    <Content Include="Views\Client\Edit.cshtml" />
-    <Content Include="Views\Client\Delete.cshtml" />
-    <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Product\Delete.cshtml" />
-    <Content Include="Views\Product\Edit.cshtml" />
-    <Content Include="Views\Razor\Product.cshtml" />
-    <Content Include="Views\Razor\Index.cshtml" />
-    <Content Include="Views\Razor\EntryDate.cshtml" />
-    <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\BaseAccount\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -269,16 +262,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDeveloper.DataAccess\WebDeveloper.DataAccess.csproj">
-      <Project>{a2f77bdb-9229-4bbc-8b19-cfe2a55681d0}</Project>
+      <Project>{b738a10e-30ad-4154-bedc-13f6ddc91b8e}</Project>
       <Name>WebDeveloper.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebDeveloper.Model\WebDeveloper.Model.csproj">
-      <Project>{18404a43-9072-48c5-9370-1e7628e3d95e}</Project>
+      <Project>{799ec88d-c8f0-47bc-a707-9c74023e17a5}</Project>
       <Name>WebDeveloper.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebDeveloper.Resources\WebDeveloper.Resources.csproj">
-      <Project>{bba7d6b4-e73b-40e4-b427-669704b7deb6}</Project>
-      <Name>WebDeveloper.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -295,7 +284,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1242</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -10,34 +10,28 @@ namespace WebDeveloper.Helpers
 {
     public static class CustomHelper
     {
-        #region Displays
         public static IHtmlString DisplayPriceStatic(double price)
         {
-            return new HtmlString(DisplayPrintPrice(price));
+            return new HtmlString(GetHtmlForPrice(price));
         }
-        public static IHtmlString DisplayPriceExtension(this HtmlHelper helper,double price)
-        {          
-            return new HtmlString(DisplayPrintPrice(price));
-        }
-        public static IHtmlString DisplayDateOrNull(DateTime? SellEndDate)
-        {
-            return new HtmlString(DisplayPrintDate(SellEndDate));
-        }
-        public static IHtmlString DisplayDateOrNullExtension(this HtmlHelper helper, DateTime? SellEndDate)
-        {
-            return new HtmlString(DisplayPrintDate(SellEndDate));
-        }
-        #endregion
 
-        #region Metodos
-        private static string DisplayPrintPrice(double price)
+        public static IHtmlString DisplayPriceExtension(this HtmlHelper helper, double price)
         {
-            return (price == 0.0 ? "<span>Free!!!!</span" : $"<span>{price}</span");
+            return new HtmlString(GetHtmlForPrice(price));
         }
-        private static string DisplayPrintDate(DateTime? SellEndDate)
+        private static string GetHtmlForPrice(double price)
         {
-            return (SellEndDate.HasValue ? "<span>Free!!!!</span" : $"<span>{SellEndDate}</span");
+            return price == 0.0 ? "<span>Free!!!</span>" : $"<span>{price.ToString("C")}</span>";
         }
-        #endregion
+
+        public static IHtmlString DisplayDateOrNullExtension(this HtmlHelper helper, DateTime? date)
+        {
+            return new HtmlString(GetDateHtml(date));
+        }
+
+        private static string GetDateHtml(DateTime? date)
+        {            
+            return date.HasValue ? $"<span>{date.Value.ToString("dd-mm-yyyy")}</span>" : "None";
+        }
     }
 }

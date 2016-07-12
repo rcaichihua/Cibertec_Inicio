@@ -1,12 +1,11 @@
-﻿using Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
+using Owin;
+using WebDeveloper.Models;
 
 namespace WebDeveloper
 {
@@ -14,12 +13,22 @@ namespace WebDeveloper
     {
         public void ConfigureAuth(IAppBuilder app)
         {
+            app.CreatePerOwinContext(WebDeveloperDbContext.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType=DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login")
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, WebDeveloperUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                }
             });
+            //app.UseExternalSignInCookie();
         }
-
     }
 }

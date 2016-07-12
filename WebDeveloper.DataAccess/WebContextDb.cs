@@ -9,28 +9,108 @@ using WebDeveloper.Model;
 
 namespace WebDeveloper.DataAccess
 {
-    //con dbContext -> contexto de datos.
     public class WebContextDb : DbContext
     {
-        //ctor snip tab tab
-        public WebContextDb() : base("name=WebDeveloperConnectionString")
+        public WebContextDb() : base("WebDeveloperConnectionString")
         {
-            Database.SetInitializer(new WebDeveloperInitializer());
         }
-        //indicar la tabla a la que se va a relacionar
-        //DbSet mapear al objeto Clients(asi se llamara la tabla en la base de datos)
-        public DbSet<Client> clients { get; set; }
-        public DbSet<Product> products { get; set; }
+
+        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<AddressType> AddressType { get; set; }
+        public virtual DbSet<BusinessEntity> BusinessEntity { get; set; }
+        public virtual DbSet<BusinessEntityAddress> BusinessEntityAddress { get; set; }
+        public virtual DbSet<BusinessEntityContact> BusinessEntityContact { get; set; }
+        public virtual DbSet<ContactType> ContactType { get; set; }
+        public virtual DbSet<CountryRegion> CountryRegion { get; set; }
+        public virtual DbSet<EmailAddress> EmailAddress { get; set; }
+        public virtual DbSet<Password> Password { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<PersonPhone> PersonPhone { get; set; }
+        public virtual DbSet<PhoneNumberType> PhoneNumberType { get; set; }
+        public virtual DbSet<StateProvince> StateProvince { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //evitar poner en plural a los objetos sin agregar(es)
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Address>()
+                .HasMany(e => e.BusinessEntityAddress)
+                .WithRequired(e => e.Address)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AddressType>()
+                .HasMany(e => e.BusinessEntityAddress)
+                .WithRequired(e => e.AddressType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BusinessEntity>()
+                .HasMany(e => e.BusinessEntityAddress)
+                .WithRequired(e => e.BusinessEntity)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BusinessEntity>()
+                .HasMany(e => e.BusinessEntityContact)
+                .WithRequired(e => e.BusinessEntity)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BusinessEntity>()
+                .HasOptional(e => e.Person)
+                .WithRequired(e => e.BusinessEntity);
+
+            modelBuilder.Entity<ContactType>()
+                .HasMany(e => e.BusinessEntityContact)
+                .WithRequired(e => e.ContactType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CountryRegion>()
+                .HasMany(e => e.StateProvince)
+                .WithRequired(e => e.CountryRegion)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Password>()
+                .Property(e => e.PasswordHash)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Password>()
+                .Property(e => e.PasswordSalt)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Person>()
+                .Property(e => e.PersonType)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.BusinessEntityContact)
+                .WithRequired(e => e.Person)
+                .HasForeignKey(e => e.PersonID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.EmailAddress)
+                .WithRequired(e => e.Person)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Person>()
+                .HasOptional(e => e.Password)
+                .WithRequired(e => e.Person);
+
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.PersonPhone)
+                .WithRequired(e => e.Person)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PhoneNumberType>()
+                .HasMany(e => e.PersonPhone)
+                .WithRequired(e => e.PhoneNumberType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<StateProvince>()
+                .Property(e => e.StateProvinceCode)
+                .IsFixedLength();
+
+            modelBuilder.Entity<StateProvince>()
+                .HasMany(e => e.Address)
+                .WithRequired(e => e.StateProvince)
+                .WillCascadeOnDelete(false);
         }
-
-        //public System.Data.Entity.DbSet<WebDeveloper.Models.Account.LoginViewModel> LoginViewModels { get; set; }
-
-        //public System.Data.Entity.DbSet<WebDeveloper.Models.Account.LoginViewModel> LoginViewModels { get; set; }
     }
 }

@@ -7,9 +7,21 @@ footer {
     background: $site-color-black;
     color: $site-color-white;
     height: 100px;
-    position: absolute;
-    bottom: 0;
+    position: absolute;    
+    width: 100%;
+    display:inline-block;
+    /*    
     left: 0;
     right: 0;
+    */
+    //bottom: 0;
     text-align: center;
+}
+
+section{
+    display: inline-block;
+}
+
+.body-content{
+    display: block;
 }
